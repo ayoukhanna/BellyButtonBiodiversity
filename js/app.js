@@ -19,3 +19,45 @@ type:"bar",
 orientation:"h"
 }
 ]
+var barLayout = {
+
+
+}
+Plotly.newPlot("bar",barData,barLayout)
+
+var bubbleData = [{
+x:results.otu_ids,
+y:results.sample_values,
+text:results.otu_labels,
+mode:"markers",
+marker:{
+    size:results.sample_values, 
+    color:results.otu_ids,
+}
+}]
+var bubbleLayout =
+{
+    xaxis : {title:"OTU ID"}
+}
+Plotly.newPlot("bubble", bubbleData,bubbleLayout)
+})
+}
+
+
+d3.json("samples.json").then((data)=>{
+console.log(data)
+var dropDown = d3.select("#selDataset")
+data.names.forEach((id)=>{
+dropDown.append("option").text(id).property("value",id)
+
+    
+})
+createCharts (data.names[0])
+
+
+})
+function optionChanged(selctedId){
+
+
+    createCharts(selctedId)
+}
